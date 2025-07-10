@@ -56,8 +56,8 @@ cd user-management-backend-api
 ```
 
 ### 2. Replace the mongourl link and secretkey in .env file with yours if needed
-MONGO_URL = your url
-SECRET_KEY = your secret key
+- MONGO_URL = your url
+- SECRET_KEY = your secret key
 
 ### 3. Run the following command 
 uvicorn app.main:app --reload
@@ -68,3 +68,9 @@ uvicorn app.main:app --reload
 
 - 📘 **Swagger UI (API Docs)**:  
   [http://localhost:8000/docs](http://localhost:8000/docs)
+
+## 📬 Contact
+
+Feel free to open issues or contribute to the repository.
+
+Happy coding! 🚀
