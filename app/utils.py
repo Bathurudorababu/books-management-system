@@ -1,13 +1,12 @@
 from passlib.context import CryptContext
-from app.database import user_collection,token_collection
 from datetime import datetime,timedelta
 import jwt
 import os
 from dotenv import load_dotenv
-
 from fastapi import HTTPException, Depends, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from jose import JWTError, jwt, ExpiredSignatureError
+from app.database import user_collection,token_collection
 
 load_dotenv()
 
@@ -25,14 +24,6 @@ async def get_user_by_email(email: str) -> dict:
 async def get_user_by_mobile(mobile: str) -> dict:
     return await user_collection.find_one({"phone": mobile})
 
-async def authenticate_user(email: str, password: str):
-    user = await user_collection.find_one({"email": email})
-    if not user:
-        return None
-    if not verify_password(password, user.get("hashed_password", "")):
-        return None
-    return user
-
 def create_access_token(data: dict, expires_delta: timedelta = None):
     to_encode = data.copy()
     # print(type(to_encode))
@@ -40,13 +31,6 @@ def create_access_token(data: dict, expires_delta: timedelta = None):
     expire = datetime.utcnow() + (expires_delta or timedelta(minutes=480))
     to_encode.update({"exp": expire})
     return jwt.encode(to_encode, os.getenv("SECRET_KEY"), algorithm=os.getenv("ALGORITHM"))
-
-def create_refresh_token(data: dict, expires_delta: timedelta = None):
-    to_encode = data.copy()
-    expire = datetime.utcnow() + (expires_delta or timedelta(days=7))  # Refresh token lasts longer
-    to_encode.update({"exp": expire})
-    return jwt.encode(to_encode, os.getenv("SECRET_KEY"), algorithm=os.getenv("ALGORITHM"))
-
 
 security = HTTPBearer()
 
