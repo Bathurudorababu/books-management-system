@@ -52,7 +52,7 @@ To begin, clone the repository to your local machine:
 
 ```bash
 git clone https://github.com/Bathurudorababu/books-management-system.git
-cd user-management-backend-api
+cd books-management-system
 ```
 
 ### 2. Replace the mongourl link and secretkey in .env file with yours if needed
