@@ -59,10 +59,13 @@ cd books-management-system
 - MONGO_URL = your url
 - SECRET_KEY = your secret key
 
-### 3. Run the following command 
-uvicorn app.main:app --reload
+### 3. Install the requirments with below command
+- pip install -r requirements.txt
 
-### 4. Access the Application
+### 4. Run the following command 
+- uvicorn app.main:app --reload
+
+### 5. Access the Application
 - 🚀 **FastAPI Backend**:  
   [http://localhost:8000](http://localhost:8000)
 
